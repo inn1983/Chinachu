@@ -610,10 +610,10 @@ function getEpg() {
 			].join(' ');
 			
 			var epgdumpProc = child_process.exec(epgdumpCmd, { maxBuffer: 104857600 }, function (err, stdout, stderr) {
-				
+				util.log('epgdumpCmd:' + epgdumpCmd);				
 				// 一時録画ファイル削除
 				fs.unlinkSync(recPath);
-				util.log('UNLINK: ' + recPath);
+				//util.log('UNLINK: ' + recPath);
 				
 				if (err !== null) {
 					util.log('[' + i + '] EPG: 不明なエラー');
@@ -686,6 +686,8 @@ function getEpg() {
 								
 								if (ch.programs.length !== 0) {
 									s.push(ch);
+									util.log('ch.programs.length:' + ch.programs.length);
+									util.log(s);
 								}
 								
 								util.log('[' + i + '] ' + 'CHANNEL: ' + ch.type + '-' + ch.channel + ' ... ' + ch.id + ' (sid=' + ch.sid + ') ' + '(programs=' + ch.programs.length.toString(10) + ')' + ' - ' + ch.name);
